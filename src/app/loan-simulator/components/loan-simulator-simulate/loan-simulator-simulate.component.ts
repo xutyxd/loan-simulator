@@ -31,5 +31,7 @@ export class LoanSimulatorSimulateComponent implements OnInit {
 
         this.loan = new LoanSimulator(parseFloat(amount), parseFloat(rate.replace(/,/g, '.')), parseFloat(term));
         console.log(this.loan);
+        console.log(this.loan.payment());
+        console.log(this.loan.simulate());
     }
 }

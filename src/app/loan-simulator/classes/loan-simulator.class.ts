@@ -7,7 +7,7 @@ export class LoanSimulator {
 
     constructor(amount: number, rate: number, years: number) {
         this.amount = amount;
-        this.rate = rate;
+        this.rate = rate / 100;
         this.years = years;
     }
 
@@ -17,11 +17,11 @@ export class LoanSimulator {
         return (this.amount * rate * Math.pow(1 + rate, payments)) / (Math.pow(1 + rate, payments) - 1);
     }
 
-    public simulate(amortizations: { when: number, amount: number }[]) {
+    public simulate(amortizations: { when: number, amount: number }[] = []) {
         let remaining = this.amount;
         let months = 0;
 
-        const paid: { remaining: number, interest: number }[] = [];
+        const pays: { remaining: number, interest: number }[] = [];
         const rate = this.rate / 12;
         const payment = this.payment();
         // Loop while there is still principal to pay
@@ -47,7 +47,7 @@ export class LoanSimulator {
                 amortized: amortization ? amortization.amount : 0,
             };
 
-            paid.push(pay);
+            pays.push(pay);
             // Safety checks to avoid infinite loops
             const timeEnded = months > this.years * 12;
             const paidAll = remaining <= 0;
@@ -56,6 +56,8 @@ export class LoanSimulator {
                 break;
             }
         }
+
+        return pays;
     }
 
 }
