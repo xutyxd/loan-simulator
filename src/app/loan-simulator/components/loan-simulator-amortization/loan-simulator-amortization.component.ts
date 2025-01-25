@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { MatCardModule } from '@angular/material/card';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { IAmortization } from '../../interfaces/amortization.interface';
+import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-loan-simulator-amortization',
   imports: [
@@ -24,8 +25,10 @@ import { IAmortization } from '../../interfaces/amortization.interface';
 })
 export class LoanSimulatorAmortizationComponent {
 
-    @Output() amortization = new EventEmitter<IAmortization>();
+    private readonly dialogRef = inject(MatDialogRef<LoanSimulatorAmortizationComponent>);
 
+    @Output() amortization = new EventEmitter<IAmortization>();
+    
     public recursive = false;
 
     public amortizationForm = new FormGroup({
@@ -47,9 +50,10 @@ export class LoanSimulatorAmortizationComponent {
         }
 
         const { amount, when, recursive } = this.amortizationForm.value;
-        console.log('Amortization to add: ', { amount: Number(amount), when: Number(when), recursive: !!recursive });
 
         this.amortizationForm.reset();
-        this.amortization.emit({ amount: Number(amount), when: Number(when), recursive: !!recursive });
+        const amortization = { amount: Number(amount), when: Number(when) - (recursive ? 0 : 1), recursive: !!recursive };
+        this.amortization.emit(amortization);
+        this.dialogRef.close(amortization);
     }
 }

@@ -22,13 +22,11 @@ export class LoanSimulator {
         let months = 0;
         let interestAccumulated = 0;
 
-        const pays: { remaining: number, interest: { current: number, accumulated: number }, payment: number }[] = [];
+        const pays: { remaining: number, interest: { current: number, accumulated: number }, payment: number, amortized: number }[] = [];
         const rate = this.rate / 12;
         const payment = this.payment();
         // Loop while there is still principal to pay
         while (remaining > 0) {
-            // Increment month counter
-            months += 1;
             // Calculate interest and principal portion of the payment
             const interest = remaining * rate;
             // Increment interest accumulated
@@ -59,6 +57,10 @@ export class LoanSimulator {
             };
 
             pays.push(pay);
+
+
+            // Increment month counter
+            months += 1;
             // Safety checks to avoid infinite loops
             const timeEnded = months > this.months;
             const paidAll = remaining <= 0;

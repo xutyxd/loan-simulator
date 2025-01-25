@@ -6,19 +6,27 @@ import * as echarts from 'echarts';
 
 import { LoanSimulator } from '../../classes/loan-simulator.class';
 
+import { MatDialog } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { LoanSimulatorAmortizationComponent } from "../loan-simulator-amortization/loan-simulator-amortization.component";
 import { IAmortization } from '../../interfaces/amortization.interface';
 import { ISimulation } from '../../interfaces/simulation.interface';
+import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-loan-simulator-simulate',
   imports: [
-    // ReactiveFormsModule,
     MatCardModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
     DecimalPipe,
-    LoanSimulatorAmortizationComponent
 ],
   templateUrl: './loan-simulator-simulate.component.html',
   styleUrl: './loan-simulator-simulate.component.scss'
@@ -26,12 +34,13 @@ import { ISimulation } from '../../interfaces/simulation.interface';
 export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
 
     private readonly route = inject(ActivatedRoute);
+    private readonly matDialog = inject(MatDialog);
 
     @ViewChild('graph') graph?: ElementRef<HTMLDivElement>;
 
     private chart?: echarts.ECharts;
     private loan?: LoanSimulator;
-    private amortizations: IAmortization[] = [];
+    public amortizations: IAmortization[] = [];
 
     public configuration = {
         amount: 0,
@@ -45,9 +54,30 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
         monthly: 0,
     };
 
+    public amortization = {
+        amount: {
+            value: 0,
+            percent: 0
+        },
+        interest: {
+            value: 0,
+            percent: 0
+        },
+        term: {
+            value: 0,
+            percent: 0
+        }
+    }
+
     public ngOnInit() {
         this.route.queryParams.subscribe(params => {
             this.configure();
+        });
+
+        fromEvent(window, 'resize').subscribe(() => {
+            if (this.chart) {
+                this.chart.resize();
+            }
         });
     }
 
@@ -118,6 +148,10 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
         }).flat(1);
     }
 
+    private percent(value: number, total: number) {
+        return 100 - (value / total) * 100;
+    }
+
     public display(chart: echarts.ECharts, loan: LoanSimulator): void {
         const simulation = loan.simulate();
         const series = this.getSeries([{ title: 'Base', data: simulation, color: ['blue', 'orange'] }]);
@@ -138,6 +172,10 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
                 }
             },
             grid: {
+                left: '15px',   // Space from the left edge
+                right: '15px',  // Space from the right edge
+                top: '15px',   // Space from the top edge (adjust if you have a title or legend)
+                bottom: '15px', // Space from the bottom edge
                 containLabel: true
             },
             xAxis: {
@@ -152,14 +190,39 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
         });
     }
 
-    public amortize(amortization: IAmortization) {
+    public addAmortization() {
+        const dialogRef = this.matDialog.open(LoanSimulatorAmortizationComponent, {
+            // width: '500px',
+            // data: this.amortization
+        });
+
+        dialogRef.afterClosed().subscribe((result) => {
+            if (!result) {
+                return;
+            }
+            const amortization = result as IAmortization;
+            this.amortize(amortization);
+        });
+    }
+
+    public removeAmortization(amortization: IAmortization) {
+        // Remove amortization
+        this.amortizations = this.amortizations.filter(a => a !== amortization);
+        // Simulate again
+        this.amortize();
+    }
+
+    public amortize(amortization?: IAmortization) {
         if (!this.loan) {
             return;
         }
         // Get base simulation
         const base = this.loan.simulate();
-        // Add amortization
-        this.amortizations.push(amortization);
+        // Check if amortization is defined
+        if (amortization) {
+            // Add amortization
+            this.amortizations.push(amortization);
+        }
         // Mix all amortizations
         const amortizations = new Array(base.length).fill(0).map((_, i) => {
             // Find amortizations that apply for that moment
@@ -173,6 +236,16 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
         });
         // Generate simulation with mixed amortizations
         const simulation = this.loan.simulate(amortizations);
+        // Update amortization information
+        // Get total amount paid
+        this.amortization.amount.value = simulation.reduce((a, b) => a + b.payment + b.amortized, 0);
+        this.amortization.amount.percent = this.percent(this.amortization.amount.value, this.information.total);
+        // Get total interest paid
+        this.amortization.interest.value = simulation.reduce((a, b) => a + b.interest.current, 0);
+        this.amortization.interest.percent = this.percent(this.amortization.interest.value, this.information.interest);
+        // Get loan term
+        this.amortization.term.value = simulation.length;
+        this.amortization.term.percent = this.percent(this.amortization.term.value, this.configuration.term);
 
         if (!this.chart) {
             return;

@@ -18,3 +18,28 @@ html {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: sans-serif; }
+
+* {
+    // overflow: auto; // Enable scrollbars only when content overflows
+    scrollbar-width: thin; // Minimal scrollbar for Firefox
+    scrollbar-color: #c1c1c1 transparent; // Color of the scrollbar (background transparent)
+  
+    // Minimal scrollbar for WebKit browsers (Chrome, Edge, Safari)
+    &::-webkit-scrollbar {
+      width: 6px; // Width of the scrollbar
+      height: 6px; // Height of the scrollbar
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: #c1c1c1; // Scrollbar thumb color
+      border-radius: 4px; // Rounded edges for scrollbar thumb
+    }
+  
+    &::-webkit-scrollbar-thumb:hover {
+      background: #a1a1a1; // Darker color on hover
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: transparent; // Transparent scrollbar track
+    }
+}

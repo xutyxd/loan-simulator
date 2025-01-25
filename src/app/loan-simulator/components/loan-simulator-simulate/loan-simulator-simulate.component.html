@@ -63,14 +63,87 @@
                 </div>
             </mat-card-content>
         </mat-card>
-        <app-loan-simulator-amortization (amortization)="amortize($event)"></app-loan-simulator-amortization>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>Amortization</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="loan-simulation__information">
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Total Paid
+                    </label>
+                    <div class="information-item__container">
+                        <span class="information-item__value">
+                            {{ amortization.amount.value | number : '1.2' : 'es-ES' }}€
+                        </span>
+                        <span class="information-item__percent">
+                            (-{{ amortization.amount.percent | number : '1.0-2' : 'es-ES' }}%)
+                        </span>
+                    </div>
+                </div>
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Interest
+                    </label>
+                    <div class="information-item__container">
+                        <span class="information-item__value">
+                            {{ amortization.interest.value | number : '1.2' : 'es-ES' }}€
+                        </span>
+                        <span class="information-item__percent">
+                            (-{{ amortization.interest.percent | number : '1.2-2' : 'es-ES' }}%)
+                        </span>
+                    </div>
+                </div>
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Loan Term (years)
+                    </label>
+                    <div class="information-item__container">
+                        <span class="information-item__value">
+                            {{ (amortization.term.value / 12)| number : '1.0-2' : 'es-ES' }}
+                            ({{  amortization.term.value }} Months)
+                        </span>
+                        <span class="information-item__percent">
+                            ({{ amortization.term.percent | number : '1.2-2' : 'es-ES' }}%)
+                        </span>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions align="end">
+                <button mat-mini-fab color="primary" (click)="addAmortization()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
     </section>
     <section class="loan-simulation__content loan-visualization">
-        <div class="loan-visualization__amortizations">
-
-        </div>
-        <div class="loan-visualization__graph">
-            <div #graph style="width: 100%;height: 100%;"></div>
-        </div>
+        <mat-card appearance="outlined" class="loan-visualization__amortizations">
+            <mat-card-content>
+                @for (amortization of amortizations ; track $index) {
+                        <div class="loan-visualization__amortizations__item">
+                            <span>
+                                @if (amortization.recursive) {
+                                    Every {{ amortization.when }} months amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
+                                    <!-- {{ amortization.when }} - {{ amortization.amount | number : '1.2' : 'es-ES' }} -->
+                                } @else {
+                                    On month {{ amortization.when }} amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
+                                    <!-- {{ amortization.when }} - {{ amortization.amount | number : '1.2' : 'es-ES' }} -->
+                                }
+                            </span>
+                            <button mat-icon-button (click)="removeAmortization(amortization)">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </div>
+                    <mat-divider></mat-divider>
+                } @empty {
+                    There are not amortizations
+                }
+            </mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined" class="loan-visualization__graph">
+            <div class="loan-visualization__graph__container">
+                <div #graph style="width: 100%;height: 100%;"></div>
+            </div>
+        </mat-card>
     </section>
 </section>
