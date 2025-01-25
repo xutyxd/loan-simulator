@@ -1,7 +1,14 @@
 
 .container {
     padding: 25px;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 50px - 20px);
     width: calc(100vw - 50px);
     overflow-y: auto;
+}
+
+.footer {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    gap: 5px;
 }
