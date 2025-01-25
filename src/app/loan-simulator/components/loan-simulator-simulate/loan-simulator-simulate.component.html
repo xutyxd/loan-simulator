@@ -1,1 +1,76 @@
-<p>loan-simulator-simulate works!</p>
+
+<section class="loan-simulation">
+    <section class="loan-simulation__header">
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>Loan configuration</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="loan-simulation__information">
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Loan Amount
+                    </label>
+                    <span class="information-item__value">
+                        {{ configuration.amount | number : '1.2' : 'es-ES' }}€
+                    </span>
+                </div>
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Annual Interest Rate (%)
+                    </label>
+                    <span class="information-item__value">
+                        {{ configuration.rate | number : '1.2' : 'es-ES' }}%
+                    </span>
+                </div>
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Loan Term (years)
+                    </label>
+                    <span class="information-item__value">
+                        {{ (configuration.term / 12)| number : '1.0-2' : 'es-ES' }}
+                    </span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <mat-card appearance="outlined">
+            <mat-card-header>
+                <mat-card-title>Loan Stats</mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="loan-simulation__information">
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Monthly payment
+                    </label>
+                    <span class="information-item__value">
+                        {{ information.monthly | number : '1.2' : 'es-ES' }}€
+                    </span>
+                </div>
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Total amount
+                    </label>
+                    <span class="information-item__value">
+                        {{ information.total | number : '1.2' : 'es-ES' }}€
+                    </span>
+                </div>
+                <div class="information-item">
+                    <label class="information-item__title">
+                        Interest
+                    </label>
+                    <span class="information-item__value">
+                        {{ information.interest | number : '1.2' : 'es-ES' }}€
+                    </span>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        <app-loan-simulator-amortization (amortization)="amortize($event)"></app-loan-simulator-amortization>
+    </section>
+    <section class="loan-simulation__content loan-visualization">
+        <div class="loan-visualization__amortizations">
+
+        </div>
+        <div class="loan-visualization__graph">
+            <div #graph style="width: 100%;height: 100%;"></div>
+        </div>
+    </section>
+</section>

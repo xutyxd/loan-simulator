@@ -1,4 +1,15 @@
+:host {
+    width: 100%;
+}
 
+.loan-configuration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
 mat-card {
     min-width: 450px;
 }

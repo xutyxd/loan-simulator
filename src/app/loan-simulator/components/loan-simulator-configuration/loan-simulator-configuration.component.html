@@ -1,32 +1,34 @@
-<mat-card appearance="outlined" [formGroup]="loanForm" (keyup.enter)="simulate()">
-    <mat-card-header>
-        <mat-card-title>Loan configuration</mat-card-title>
-        <mat-card-subtitle>Configure loan to get basic simulation</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="input-container">
-            <mat-form-field appearance="outline">
-                <mat-label>Loan amount</mat-label>
-                <input matInput placeholder="100000" formControlName="amount">
-                <mat-icon matSuffix>attach_money</mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="input-container">
-            <mat-form-field appearance="outline">
-                <mat-label>Annual interest rate</mat-label>
-                <input matInput placeholder="2.5" formControlName="rate">
-                <mat-icon matSuffix>percent</mat-icon>
-            </mat-form-field>
-        </div>
-        <div class="input-container">
-            <mat-form-field appearance="outline">
-                <mat-label>Loan term</mat-label>
-                <input matInput placeholder="25" formControlName="term">
-                <mat-icon matSuffix>schedule</mat-icon>
-            </mat-form-field>
-        </div>
-    </mat-card-content>
-    <mat-card-actions align="end">
-        <button mat-raised-button color="primary" [disabled]="loanForm.valid ? null : true" (click)="simulate()">Simulate</button>
-    </mat-card-actions>
-</mat-card>
+<section class="loan-configuration">
+    <mat-card appearance="outlined" [formGroup]="loanForm" (keyup.enter)="simulate()">
+        <mat-card-header>
+            <mat-card-title>Loan configuration</mat-card-title>
+            <mat-card-subtitle>Configure loan to get basic simulation</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="input-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Loan amount</mat-label>
+                    <input matInput placeholder="100000" formControlName="amount">
+                    <mat-icon matSuffix>attach_money</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="input-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Annual interest rate</mat-label>
+                    <input matInput placeholder="2.5" formControlName="rate">
+                    <mat-icon matSuffix>percent</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="input-container">
+                <mat-form-field appearance="outline">
+                    <mat-label>Loan term</mat-label>
+                    <input matInput placeholder="300 (25 years)" formControlName="term">
+                    <mat-icon matSuffix>schedule</mat-icon>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" [disabled]="loanForm.valid ? null : true" (click)="simulate()">Simulate</button>
+        </mat-card-actions>
+    </mat-card>
+</section>

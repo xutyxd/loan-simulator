@@ -7,122 +7,139 @@
 
 /* Light Theme */
 :root, :host {
-  @include mat.theme-overrides((
-    primary: #5e5e5e,
-    on-primary: #ffffff,
-    primary-container: #e2e2e2,
-    on-primary-container: #1b1b1b,
-    inverse-primary: #c6c6c6,
-    primary-fixed: #e2e2e2,
-    primary-fixed-dim: #c6c6c6,
-    on-primary-fixed: #1b1b1b,
-    on-primary-fixed-variant: #474747,
-    secondary: #5e5e5e,
-    on-secondary: #ffffff,
-    secondary-container: #e4e2e2,
-    on-secondary-container: #1b1c1c,
-    secondary-fixed: #e4e2e2,
-    secondary-fixed-dim: #c7c6c6,
-    on-secondary-fixed: #1b1c1c,
-    on-secondary-fixed-variant: #464747,
-    tertiary: #5e5e5e,
-    on-tertiary: #ffffff,
-    tertiary-container: #e4e2e2,
-    on-tertiary-container: #1b1c1c,
-    tertiary-fixed: #e4e2e2,
-    tertiary-fixed-dim: #c7c6c6,
-    on-tertiary-fixed: #1b1c1c,
-    on-tertiary-fixed-variant: #464747,
-    background: #fcf8f8,
-    on-background: #1c1b1b,
-    surface: #fcf8f8,
-    surface-dim: #ddd9d8,
-    surface-bright: #fcf8f8,
-    surface-container-lowest: #ffffff,
-    surface-container-low: #f7f3f2,
-    surface-container: #f1edec,
-    surface-container-high: #ebe7e7,
-    surface-container-highest: #e5e2e1,
-    on-surface: #1c1b1b,
-    shadow: #000000,
-    scrim: #000000,
-    surface-tint: #5e5e5e,
-    inverse-surface: #313030,
-    inverse-on-surface: #f4f0ef,
-    outline: #747878,
-    outline-variant: #d0c4c5,
-    neutral: #797776,
-    neutral10: #1c1b1b,
-    error: #ba1a1a,
-    error-container: #ffdad6,
-    on-error: #ffffff,
-    on-error-container: #410002,
-    surface-variant: #eddfe1,
-    on-surface-variant: #4d4546,
-    neutral-variant: #7f7576,
-    neutral-variant20: #362f30,
-    inverse-secondary: #c7c6c6,
-    inverse-tertiary: #c7c6c6,
-  ));
-}
-
-/* Dark Theme */
-.dark {
-  @include mat.theme-overrides((
-    primary: #c6c6c6,
-    on-primary: #303030,
-    primary-container: #474747,
-    on-primary-container: #e2e2e2,
-    inverse-primary: #5e5e5e,
-    primary-fixed: #e2e2e2,
-    primary-fixed-dim: #c6c6c6,
-    on-primary-fixed: #1b1b1b,
-    on-primary-fixed-variant: #474747,
-    secondary: #c7c6c6,
-    on-secondary: #303030,
-    secondary-container: #464747,
-    on-secondary-container: #e4e2e2,
-    secondary-fixed: #e4e2e2,
-    secondary-fixed-dim: #c7c6c6,
-    on-secondary-fixed: #1b1c1c,
-    on-secondary-fixed-variant: #464747,
-    tertiary: #c7c6c6,
-    on-tertiary: #303030,
-    tertiary-container: #464747,
-    on-tertiary-container: #e4e2e2,
-    tertiary-fixed: #e4e2e2,
-    tertiary-fixed-dim: #c7c6c6,
-    on-tertiary-fixed: #1b1c1c,
-    on-tertiary-fixed-variant: #464747,
-    background: #141313,
-    on-background: #e5e2e1,
-    surface: #141313,
-    surface-dim: #141313,
-    surface-bright: #3a3939,
-    surface-container-lowest: #0e0e0e,
-    surface-container-low: #1c1b1b,
-    surface-container: #201f1f,
-    surface-container-high: #2a2a2a,
-    surface-container-highest: #353434,
-    on-surface: #e5e2e1,
-    shadow: #000000,
-    scrim: #000000,
-    surface-tint: #c7c6c6,
-    inverse-surface: #e5e2e1,
-    inverse-on-surface: #313030,
-    outline: #8e9192,
-    outline-variant: #4d4546,
-    neutral: #797776,
-    neutral10: #1c1b1b,
-    error: #ffb4ab,
-    error-container: #93000a,
-    on-error: #690005,
-    on-error-container: #ffdad6,
-    surface-variant: #4d4546,
-    on-surface-variant: #d0c4c5,
-    neutral-variant: #7f7576,
-    neutral-variant20: #362f30,
-    inverse-secondary: #5e5e5e,
-    inverse-tertiary: #5e5e5e,
-  ));
-}
+    @include mat.theme-overrides((
+      primary: #1a73e8, // Trustworthy blue
+      on-primary: #ffffff,
+      primary-container: #dce9ff, // Lighter blue for backgrounds
+      on-primary-container: #00327d, // Dark blue for text
+      inverse-primary: #82b1ff, // Softer blue for highlights
+      primary-fixed: #dce9ff,
+      primary-fixed-dim: #b2d3ff,
+      on-primary-fixed: #00327d,
+      on-primary-fixed-variant: #1a73e8,
+  
+      secondary: #4caf50, // Positive green for secondary actions
+      on-secondary: #ffffff,
+      secondary-container: #d4f7d9,
+      on-secondary-container: #1a4d24,
+      secondary-fixed: #d4f7d9,
+      secondary-fixed-dim: #b3e4b8,
+      on-secondary-fixed: #1a4d24,
+      on-secondary-fixed-variant: #4caf50,
+  
+      tertiary: #ff9800, // Accent for emphasis
+      on-tertiary: #ffffff,
+      tertiary-container: #ffe6cc,
+      on-tertiary-container: #663c00,
+      tertiary-fixed: #ffe6cc,
+      tertiary-fixed-dim: #ffc299,
+      on-tertiary-fixed: #663c00,
+      on-tertiary-fixed-variant: #ff9800,
+  
+      background: #f9fafa, // Soft light grey for background
+      on-background: #202124, // Dark grey for text
+      surface: #ffffff,
+      surface-dim: #f1f3f4,
+      surface-bright: #ffffff,
+      surface-container-lowest: #ffffff,
+      surface-container-low: #f9fafa,
+      surface-container: #f3f5f7,
+      surface-container-high: #e7ebed,
+      surface-container-highest: #dce0e3,
+      on-surface: #202124,
+      shadow: #000000,
+      scrim: #000000,
+  
+      surface-tint: #1a73e8,
+      inverse-surface: #202124,
+      inverse-on-surface: #f1f3f4,
+      outline: #b0bec5, // Subtle grey outline
+      outline-variant: #d9e1e5,
+  
+      neutral: #909090, // Neutral grey for non-critical elements
+      neutral10: #202124,
+  
+      error: #e53935, // Clear red for errors
+      error-container: #ffdad6,
+      on-error: #ffffff,
+      on-error-container: #410002,
+  
+      surface-variant: #e3e7eb, // Subtle textured surface
+      on-surface-variant: #4a535a,
+      neutral-variant: #808a91,
+      neutral-variant20: #374147,
+  
+      inverse-secondary: #82b1ff,
+      inverse-tertiary: #ffc299,
+    ));
+  }
+  
+  /* Dark Theme */
+  .dark {
+    @include mat.theme-overrides((
+      primary: #82b1ff, // Softer blue for dark mode
+      on-primary: #00274d,
+      primary-container: #003f88,
+      on-primary-container: #dce9ff,
+      inverse-primary: #1a73e8,
+      primary-fixed: #003f88,
+      primary-fixed-dim: #00274d,
+      on-primary-fixed: #dce9ff,
+      on-primary-fixed-variant: #82b1ff,
+  
+      secondary: #66bb6a, // Softer green for dark mode
+      on-secondary: #00391e,
+      secondary-container: #004f2b,
+      on-secondary-container: #d4f7d9,
+      secondary-fixed: #004f2b,
+      secondary-fixed-dim: #00391e,
+      on-secondary-fixed: #d4f7d9,
+      on-secondary-fixed-variant: #66bb6a,
+  
+      tertiary: #ffa726, // Warmer accent for dark mode
+      on-tertiary: #4a2900,
+      tertiary-container: #5d3f00,
+      on-tertiary-container: #ffe6cc,
+      tertiary-fixed: #5d3f00,
+      tertiary-fixed-dim: #4a2900,
+      on-tertiary-fixed: #ffe6cc,
+      on-tertiary-fixed-variant: #ffa726,
+  
+      background: #121212, // Deep black background
+      on-background: #e5e5e5, // Light grey for text
+      surface: #121212,
+      surface-dim: #1e1e1e,
+      surface-bright: #292929,
+      surface-container-lowest: #0e0e0e,
+      surface-container-low: #1c1c1c,
+      surface-container: #222222,
+      surface-container-high: #2a2a2a,
+      surface-container-highest: #353535,
+      on-surface: #e5e5e5,
+      shadow: #000000,
+      scrim: #000000,
+  
+      surface-tint: #82b1ff,
+      inverse-surface: #e5e5e5,
+      inverse-on-surface: #303030,
+      outline: #50575d, // Neutral outline
+      outline-variant: #374147,
+  
+      neutral: #b0b3b8,
+      neutral10: #121212,
+  
+      error: #f44336,
+      error-container: #93000a,
+      on-error: #ffffff,
+      on-error-container: #ffdad6,
+  
+      surface-variant: #32383e,
+      on-surface-variant: #e3e7eb,
+      neutral-variant: #545b62,
+      neutral-variant20: #2c333a,
+  
+      inverse-secondary: #1a73e8,
+      inverse-tertiary: #ffa726,
+    ));
+  }
+  
