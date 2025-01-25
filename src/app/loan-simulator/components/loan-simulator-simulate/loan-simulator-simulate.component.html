@@ -124,10 +124,8 @@
                             <span>
                                 @if (amortization.recursive) {
                                     Every {{ amortization.when }} months amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
-                                    <!-- {{ amortization.when }} - {{ amortization.amount | number : '1.2' : 'es-ES' }} -->
                                 } @else {
                                     On month {{ amortization.when }} amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
-                                    <!-- {{ amortization.when }} - {{ amortization.amount | number : '1.2' : 'es-ES' }} -->
                                 }
                             </span>
                             <button mat-icon-button (click)="removeAmortization(amortization)">
@@ -141,9 +139,9 @@
             </mat-card-content>
         </mat-card>
         <mat-card appearance="outlined" class="loan-visualization__graph">
-            <div class="loan-visualization__graph__container">
+            <mat-card-content class="loan-visualization__graph__container">
                 <div #graph style="width: 100%;height: 100%;"></div>
-            </div>
+            </mat-card-content>
         </mat-card>
     </section>
 </section>

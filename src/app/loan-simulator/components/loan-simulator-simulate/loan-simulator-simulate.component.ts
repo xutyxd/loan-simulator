@@ -89,10 +89,11 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
         if (!amount || !rate || !term) {
             return;
         }
+        const formattedRate = rate.replace(/,/g, '.');
         // Load configuration from route
-        this.configuration = { amount, rate, term };
+        this.configuration = { amount, rate: formattedRate, term };
 
-        this.loan = new LoanSimulator(parseFloat(amount), parseFloat(rate.replace(/,/g, '.')), parseFloat(term));
+        this.loan = new LoanSimulator(parseFloat(amount), parseFloat(formattedRate), parseFloat(term));
         const simulation = this.loan.simulate();
         const interest = simulation.map(s => s.interest.current).reduce((a, b) => a + b, 0);
         // Set basic information about the loan configured
@@ -174,7 +175,7 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
             grid: {
                 left: '15px',   // Space from the left edge
                 right: '15px',  // Space from the right edge
-                top: '15px',   // Space from the top edge (adjust if you have a title or legend)
+                top: '30px',   // Space from the top edge (adjust if you have a title or legend)
                 bottom: '15px', // Space from the bottom edge
                 containLabel: true
             },
@@ -191,10 +192,7 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
     }
 
     public addAmortization() {
-        const dialogRef = this.matDialog.open(LoanSimulatorAmortizationComponent, {
-            // width: '500px',
-            // data: this.amortization
-        });
+        const dialogRef = this.matDialog.open(LoanSimulatorAmortizationComponent);
 
         dialogRef.afterClosed().subscribe((result) => {
             if (!result) {
