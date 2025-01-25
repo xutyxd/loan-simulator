@@ -167,11 +167,11 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
             legend: {
                 data: series.map(s => s.name)
             },
-            toolbox: {
-                feature: {
-                    saveAsImage: {}
-                }
-            },
+            // toolbox: {
+            //     feature: {
+            //         saveAsImage: {}
+            //     }
+            // },
             grid: {
                 left: '15px',   // Space from the left edge
                 right: '15px',  // Space from the right edge
@@ -258,7 +258,8 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
 
         this.chart.setOption({
             legend: {
-                data: labels
+                data: labels,
+                type: 'scroll',
             },
             series
         });
