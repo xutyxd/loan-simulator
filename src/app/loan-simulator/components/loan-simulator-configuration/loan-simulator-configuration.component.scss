@@ -9,6 +9,11 @@
     justify-content: center;
     height: 100%;
     width: 100%;
+    gap: 20px;
+
+    &__logo {
+        margin-top: -96px;
+    }
 }
 
 mat-card-content {
