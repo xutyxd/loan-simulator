@@ -125,7 +125,7 @@
                                 @if (amortization.recursive) {
                                     Every {{ amortization.when }} months amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
                                 } @else {
-                                    On month {{ amortization.when }} amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
+                                    On month {{ amortization.when + 1 }} amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
                                 }
                             </span>
                             <button mat-icon-button (click)="removeAmortization(amortization)">
