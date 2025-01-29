@@ -223,10 +223,10 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
         }
         // Mix all amortizations
         const amortizations = new Array(base.length).fill(0).map((_, i) => {
-            const index = i + 1;
             // Find amortizations that apply for that moment
             const apply = this.amortizations.filter((amortization) => {
                 const { when, recursive } = amortization;
+                const index = i + (recursive ? 1 : 0);
                 return recursive ? index % when === 0 : when === index;
             });
             // Return mixed amortization

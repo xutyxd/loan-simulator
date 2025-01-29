@@ -27,6 +27,7 @@ export class LoanSimulator {
         const payment = this.payment();
         // Loop while there is still principal to pay
         while (remaining > 0) {
+            let payed = payment;
             // Calculate interest and principal portion of the payment
             const interest = remaining * rate;
             // Increment interest accumulated
@@ -35,30 +36,43 @@ export class LoanSimulator {
             const principal = payment - interest;
             // Update remaining principal
             remaining -= principal;
-            // Find if there is amortization to apply
-            const amortization = amortizations.find(a => a.when === months);
-            // If there is, apply it
-            if (amortization) {
-                remaining -= amortization.amount;
-            }
-
-            if (remaining <= 0) {
+            // If remaining is negative, discount from the payment
+            if (remaining < 0) {
+                payed -= Math.abs(remaining);
                 remaining = 0;
-            } 
+            }
+            let amortized = 0;
+            // If there is still remaining, find if there is amortization to apply
+            if (remaining > 0) {
+                // Find if there is amortization to apply
+                const amortization = amortizations.find(a => a.when === months);
+                // If there is, apply it
+                if (amortization) {
+                    if (remaining < amortization.amount) {
+                    }
+                    remaining -= amortization.amount;
+                }
+                // Get amortization amount
+                amortized = amortization ? amortization.amount : 0;
+                // If remaining is negative, amortize the remaining amount
+                if (remaining < 0) {
+                    amortized -= Math.abs(remaining);
+                    // Avoid negative remaining
+                    remaining = 0;
+                }
+            }
             // Generate a new payment
             const pay = {
-                remaining: Number(remaining.toFixed(2)),
-                payment: Number(payment.toFixed(2)),
+                remaining: Number(remaining),
+                payment: Number(payed),
                 interest: {
-                    current:Number(interest.toFixed(2)),
-                    accumulated: Number(interestAccumulated.toFixed(2)),
+                    current:Number(interest),
+                    accumulated: Number(interestAccumulated),
                 },
-                amortized: Number(amortization ? amortization.amount : 0),
+                amortized: Number(amortized),
             };
 
             pays.push(pay);
-
-
             // Increment month counter
             months += 1;
             // Safety checks to avoid infinite loops
