@@ -17,6 +17,7 @@ import { LoanSimulatorAmortizationComponent } from "../loan-simulator-amortizati
 import { IAmortization } from '../../interfaces/amortization.interface';
 import { ISimulation } from '../../interfaces/simulation.interface';
 import { fromEvent } from 'rxjs';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-loan-simulator-simulate',
@@ -27,6 +28,7 @@ import { fromEvent } from 'rxjs';
     MatIconModule,
     MatDividerModule,
     DecimalPipe,
+    TranslocoPipe,
 ],
   templateUrl: './loan-simulator-simulate.component.html',
   styleUrl: './loan-simulator-simulate.component.scss'
@@ -35,6 +37,14 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
 
     private readonly route = inject(ActivatedRoute);
     private readonly matDialog = inject(MatDialog);
+    private readonly translocoService = inject(TranslocoService);
+
+    private translations = {
+        base: this.translocoService.translate('common.base'),
+        amortization: this.translocoService.translate('simulation.amortization'),
+        remaining: this.translocoService.translate('common.remaining'),
+        interest: this.translocoService.translate('simulation.interest'),
+    }
 
     @ViewChild('graph') graph?: ElementRef<HTMLDivElement>;
 
@@ -122,7 +132,7 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
 
             return [
                 {
-                    name: `${title} remaining`,
+                    name: `${title} ${this.translations.remaining}`,
                     type: 'line',
                     data: remaining,
                     smooth: true,
@@ -134,7 +144,7 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
                     }
                 },
                 {
-                    name: `${title} interest`,
+                    name: `${title} ${this.translations.interest}`,
                     type: 'line',
                     data: interest,
                     smooth: true,
@@ -155,7 +165,7 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
 
     public display(chart: echarts.ECharts, loan: LoanSimulator): void {
         const simulation = loan.simulate();
-        const series = this.getSeries([{ title: 'Base', data: simulation, color: ['blue', 'orange'] }]);
+        const series = this.getSeries([{ title: this.translations.base, data: simulation, color: ['blue', 'orange'] }]);
 
         chart.setOption({
             tooltip: {
@@ -251,8 +261,8 @@ export class LoanSimulatorSimulateComponent implements OnInit, AfterViewInit {
         }
 
         const series = this.getSeries([
-            { title: 'Base', data: base, color: ['blue', 'orange'] },
-            { title: 'Amortization', data: simulation, color: ['green', 'red'] }
+            { title: this.translations.base, data: base, color: ['blue', 'orange'] },
+            { title: this.translations.amortization, data: simulation, color: ['green', 'red'] }
         ]);
 
         const labels = series.map(s => s.name);

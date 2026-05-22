@@ -3,8 +3,13 @@
     <router-outlet></router-outlet>
 </section>
 <section class="footer">
+    <div class="footer__languages">
+        @for (language of languages(); track $index) {
+            <a href="javascript:void(0)" (click)="translate(language)">{{ language }}</a>
+        }
+    </div>
     <span>
-        Made with ☕ by
+        {{ 'common.made-by' | transloco }}
     </span>
     <a href="https://github.com/xutyxd" target="_blank">Xuty</a>
 </section>

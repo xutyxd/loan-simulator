@@ -11,4 +11,10 @@
     justify-self: center;
     align-self: center;
     gap: 5px;
+
+    &__languages {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
 }

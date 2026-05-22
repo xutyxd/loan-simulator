@@ -1,0 +1,33 @@
+{
+    "common": {
+        "title": "Loan configuration",
+        "years": "years",
+        "months": "Months",
+        "amount": "Loan amount",
+        "rate": "Annual interest rate",
+        "term": "Loan term",
+        "made-by": "Made with ☕ by",
+        "every": "Every",
+        "when": "When",
+        "recursive": "Recursive",
+        "base": "Base",
+        "remaining": "remaining"
+    },
+    "configuration": {
+        "subtitle": "Configure loan to get basic simulation",
+        "action": "Simulate"
+    },
+    "simulation": {
+        "title": "Loan stats",
+        "monthly": "Monthly payment",
+        "total-amount": "Total amount",
+        "total-paid": "Total paid",
+        "interest": "Interest",
+        "amortization": "Amortization",
+        "amortization-title": "Amortizations",
+        "amortization-recursive": "Every {{ when }} months amortize {{ amount }}€",
+        "amortization-non-recursive": "On month {{ when }} amortize {{ amount }}€",
+        "amortization-empty": "There are not amortizations",
+        "amortize": "Amortize"
+    }
+}

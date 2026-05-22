@@ -1,0 +1,33 @@
+{
+    "common": {
+        "title": "Configuración del préstamo",
+        "years": "años",
+        "months": "Meses",
+        "amount": "Importe del préstamo",
+        "rate": "Tipo de interés anual",
+        "term": "Plazo del préstamo",
+        "made-by": "Hecho con ☕ por",
+        "every": "Cada",
+        "when": "Cuando",
+        "recursive": "Recursivo",
+        "base": "Base",
+        "remaining": "restante"
+    },
+    "configuration": {
+        "subtitle": "Configura el préstamo para obtener una simulación básica",
+        "action": "Simular"
+    },
+    "simulation": {
+        "title": "Estadísticas del préstamo",
+        "monthly": "Cuota mensual",
+        "total-amount": "Importe total",
+        "total-paid": "Total pagado",
+        "interest": "Intereses",
+        "amortization": "Amortización",
+        "amortization-title": "Amortizaciones",
+        "amortization-recursive": "Cada {{ when }} meses amortizar {{ amount }}€",
+        "amortization-non-recursive": "En el mes {{ when }} amortizar {{ amount }}€",
+        "amortization-empty": "No hay amortizaciones",
+        "amortize": "Amortizar"
+    }
+}

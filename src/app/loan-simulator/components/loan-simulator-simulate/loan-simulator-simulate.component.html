@@ -3,12 +3,12 @@
     <section class="loan-simulation__header">
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Loan configuration</mat-card-title>
+                <mat-card-title>{{ 'common.title' | transloco }}</mat-card-title>
             </mat-card-header>
             <mat-card-content class="loan-simulation__information">
                 <div class="information-item">
                     <label class="information-item__title">
-                        Loan Amount
+                        {{ 'common.amount' | transloco }}
                     </label>
                     <span class="information-item__value">
                         {{ configuration.amount | number : '1.2' : 'es-ES' }}€
@@ -16,7 +16,7 @@
                 </div>
                 <div class="information-item">
                     <label class="information-item__title">
-                        Annual Interest Rate (%)
+                        {{ 'common.rate' | transloco }} (%)
                     </label>
                     <span class="information-item__value">
                         {{ configuration.rate | number : '1.2' : 'es-ES' }}%
@@ -24,22 +24,22 @@
                 </div>
                 <div class="information-item">
                     <label class="information-item__title">
-                        Loan Term (years)
+                        {{ 'common.term' | transloco }} ({{ 'common.years' | transloco }})
                     </label>
                     <span class="information-item__value">
-                        {{ (configuration.term / 12)| number : '1.0-2' : 'es-ES' }}
+                        {{ (configuration.term / 12) | number : '1.0-2' : 'es-ES' }}
                     </span>
                 </div>
             </mat-card-content>
         </mat-card>
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Loan Stats</mat-card-title>
+                <mat-card-title>{{ 'simulation.title' | transloco }}</mat-card-title>
             </mat-card-header>
             <mat-card-content class="loan-simulation__information">
                 <div class="information-item">
                     <label class="information-item__title">
-                        Monthly payment
+                        {{ 'simulation.monthly' | transloco }}
                     </label>
                     <span class="information-item__value">
                         {{ information.monthly | number : '1.2' : 'es-ES' }}€
@@ -47,7 +47,7 @@
                 </div>
                 <div class="information-item">
                     <label class="information-item__title">
-                        Total amount
+                        {{ 'simulation.total-amount' | transloco }}
                     </label>
                     <span class="information-item__value">
                         {{ information.total | number : '1.2' : 'es-ES' }}€
@@ -55,7 +55,7 @@
                 </div>
                 <div class="information-item">
                     <label class="information-item__title">
-                        Interest
+                        {{ 'simulation.interest' | transloco }}
                     </label>
                     <span class="information-item__value">
                         {{ information.interest | number : '1.2' : 'es-ES' }}€
@@ -65,12 +65,12 @@
         </mat-card>
         <mat-card appearance="outlined">
             <mat-card-header>
-                <mat-card-title>Amortization</mat-card-title>
+                <mat-card-title>{{ 'simulation.amortization' | transloco }}</mat-card-title>
             </mat-card-header>
             <mat-card-content class="loan-simulation__information">
                 <div class="information-item">
                     <label class="information-item__title">
-                        Total Paid
+                        {{ 'simulation.total-paid' | transloco }}
                     </label>
                     <div class="information-item__container">
                         <span class="information-item__value">
@@ -83,7 +83,7 @@
                 </div>
                 <div class="information-item">
                     <label class="information-item__title">
-                        Interest
+                        {{ 'simulation.interest' | transloco }}
                     </label>
                     <div class="information-item__container">
                         <span class="information-item__value">
@@ -96,12 +96,12 @@
                 </div>
                 <div class="information-item">
                     <label class="information-item__title">
-                        Loan Term (years)
+                        {{ 'common.term' | transloco }} ({{ 'common.years' | transloco }})
                     </label>
                     <div class="information-item__container">
                         <span class="information-item__value">
                             {{ (amortization.term.value / 12)| number : '1.0-2' : 'es-ES' }}
-                            ({{  amortization.term.value }} Months)
+                            ({{  amortization.term.value }} {{ 'common.months' | transloco }})
                         </span>
                         <span class="information-item__percent">
                             ({{ amortization.term.percent | number : '1.2-2' : 'es-ES' }}%)
@@ -123,9 +123,9 @@
                         <div class="loan-visualization__amortizations__item">
                             <span>
                                 @if (amortization.recursive) {
-                                    Every {{ amortization.when }} months amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
+                                     {{ 'simulation.amortization-recursive' | transloco: { when: amortization.when, amount: amortization.amount | number : '1.2' : 'es-ES' } }}
                                 } @else {
-                                    On month {{ amortization.when + 1 }} amortize {{ amortization.amount | number : '1.2' : 'es-ES' }}€
+                                    {{ 'simulation.amortization-non-recursive' | transloco: { when: amortization.when + 1, amount: amortization.amount | number : '1.2' : 'es-ES' } }}
                                 }
                             </span>
                             <button mat-icon-button (click)="removeAmortization(amortization)">
@@ -134,7 +134,7 @@
                         </div>
                     <mat-divider></mat-divider>
                 } @empty {
-                    There are not amortizations
+                    {{ 'simulation.amortization-empty' | transloco }}
                 }
             </mat-card-content>
         </mat-card>

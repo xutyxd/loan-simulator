@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { IAmortization } from '../../interfaces/amortization.interface';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TranslocoPipe } from '@ngneat/transloco';
 @Component({
   selector: 'app-loan-simulator-amortization',
   imports: [
@@ -19,6 +20,7 @@ import { MatDialogRef } from '@angular/material/dialog';
     MatIconModule,
     MatButtonModule,
     MatSlideToggleModule,
+    TranslocoPipe,
   ],
   templateUrl: './loan-simulator-amortization.component.html',
   styleUrl: './loan-simulator-amortization.component.scss'

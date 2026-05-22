@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslocoPipe } from '@ngneat/transloco';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    TranslocoPipe
   ],
   templateUrl: './loan-simulator-configuration.component.html',
   styleUrl: './loan-simulator-configuration.component.scss'
@@ -30,12 +32,10 @@ export class LoanSimulatorConfigurationComponent {
         term: new FormControl(undefined,  [Validators.required, Validators.min(0)]),
     });
 
-    constructor(private router: Router) { }
+    constructor(private router: Router) {}
 
     public simulate() {
         const loan = this.loanForm.value;
-
-        console.log(loan);
 
         if (!this.loanForm.valid) {
             return;

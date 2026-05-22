@@ -1,25 +1,27 @@
 <mat-card [formGroup]="amortizationForm">
     <mat-card-header>
-        <mat-card-title>Amortization</mat-card-title>
+        <mat-card-title>{{ 'simulation.amortization' | transloco }}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
         <section class="amortization-container">
             <mat-form-field appearance="outline">
-                <mat-label>Loan amount</mat-label>
+                <mat-label>{{ 'common.amount' | transloco }}</mat-label>
                 <input matInput placeholder="500" formControlName="amount">
                 <mat-icon matSuffix>attach_money</mat-icon>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>{{ recursive ? 'Every' : 'When' }}</mat-label>
+                <mat-label>{{ ('common.' + (recursive ? 'every' : 'when')) | transloco }}</mat-label>
                 <input matInput placeholder="1" formControlName="when">
                 <mat-icon matSuffix>schedule</mat-icon>
             </mat-form-field>
             <mat-slide-toggle formControlName="recursive">
-                Recursive
+                {{ 'common.recursive' | transloco }}
             </mat-slide-toggle>
         </section>
     </mat-card-content>
     <mat-card-actions align="end">
-        <button mat-raised-button color="primary" [disabled]="amortizationForm.valid ? null : true" (click)="add()">Amortize</button>
+        <button mat-raised-button color="primary" [disabled]="amortizationForm.valid ? null : true" (click)="add()">
+            {{ 'simulation.amortize' | transloco }}
+        </button>
     </mat-card-actions>
 </mat-card>
