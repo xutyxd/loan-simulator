@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "loan-simulator-9066a",
     "public": "/dist/loan-simulator/browser",
     "ignore": [
       "firebase.json",

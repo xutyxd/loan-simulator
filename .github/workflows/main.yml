@@ -35,7 +35,7 @@ jobs:
         run: |
           npx semantic-release
           npm run build
-          firebase deploy --only hosting:default --token $FIREBASE_TOKEN
+          firebase deploy --only hosting --token $FIREBASE_TOKEN
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }} # Token for generate tags on the repo
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }} # Token for publish on npmjs.com
